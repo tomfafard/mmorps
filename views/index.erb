@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Massively Multiplayer Online Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="../public/styles.css"></link>
+  </head>
+
+  <body>
+    <header>
+        <h1>MMORPS</h1>
+    </header>
+          </br>
+      <h4>You: <%= session[:user_score]%></h4>
+      <h4>Computer: <%= session[:computer_score]%></h4>
+          </br></br>
+
+      <% if session[:visit_count] > 1%>
+          You chose <%= session[:user_selection] %>. The computer chose <%= session[:comp_selection] %>.
+      <% end %>
+
+          </br></br>
+      <%= session[:result] %>
+          </br></br>
+
+      <% if session[:user_score] < 2 && session[:computer_score] < 2 %>
+
+          <form action="/choice" method="post">
+          <h3>Choose one:</h3>
+          <input type="submit" name="choice" value="Rock">
+          <input type="submit" name="choice" value="Paper">
+          <input type="submit" name="choice" value="Scissors">
+          </form>
+
+      <% else %>
+
+          <% if session[:user_score] >= 2 %>
+              <h3>YOU WON!</h3>
+          <% elsif session[:computer_score] >= 2 %>
+              <h3>COMPUTER WON.</h3>
+          <%end%>
+          <a href="/play_again">PLAY AGAIN? (click here)</a>
+
+      <% end %>
+  </body>
+</html>
